@@ -10,15 +10,15 @@ import android.os.IBinder;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.github.dubu.lockscreenusingservice.LockscreenActivity;
+import com.github.dubu.lockscreenusingservice.LockScreenActivity;
 import com.github.dubu.lockscreenusingservice.LockscreenUtil;
 
 
 /**
  * Created by mugku on 15. 5. 20..
  */
-public class LockscreenService extends Service {
-    private final String TAG = "LockscreenService";
+public class LockScreenService extends Service {
+    private final String TAG = "LockScreenService";
     //    public static final String LOCKSCREENSERVICE_FIRST_START = "LOCKSCREENSERVICE_FIRST_START";
     private int mServiceStartId = 0;
     private Context mContext = null;
@@ -29,7 +29,7 @@ public class LockscreenService extends Service {
         public void onReceive(Context context, Intent intent) {
             if (null != context) {
                 if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-                    Intent startLockscreenIntent = new Intent(mContext, LockscreenViewService.class);
+                    Intent startLockscreenIntent = new Intent(mContext, LockScreenViewService.class);
                     stopService(startLockscreenIntent);
                     TelephonyManager tManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                     boolean isPhoneIdle = tManager.getCallState() == TelephonyManager.CALL_STATE_IDLE;
@@ -71,8 +71,8 @@ public class LockscreenService extends Service {
         } else {
             Log.d(TAG, TAG + " onStartCommand intent NOT existed");
         }
-        setLockGuard();
-        return LockscreenService.START_STICKY;
+        //setLockGuard();
+        return LockScreenService.START_STICKY;
     }
 
 
@@ -125,13 +125,15 @@ public class LockscreenService extends Service {
     @Override
     public void onDestroy() {
         stateRecever(false);
-        setStandardKeyguardState(true);
+        //setStandardKeyguardState(true);
     }
 
     private void startLockscreenActivity() {
-        Intent startLockscreenActIntent = new Intent(mContext, LockscreenActivity.class);
-        startLockscreenActIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(startLockscreenActIntent);
+        //Intent startLockscreenActIntent = new Intent(mContext, LockScreenActivity.class);
+        //startLockscreenActIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        //startActivity(startLockscreenActIntent);
+        LockScreenActivity.startLockScreenActivity(mContext);
     }
 
 }

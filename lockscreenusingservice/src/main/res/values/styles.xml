@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="ez" parent="@android:style/Theme.Translucent.NoTitleBar">
+    <item name="android:windowBackground">@color/c</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowDisablePreview">true</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+  </style>
+
+  <style name="Base.AppTheme" parent="@style/Theme.AppCompat.Light">
+    <item name="android:disabledAlpha">0.5</item>
+    <item name="android:windowBackground">@color/normalBackground</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:fadingEdgeLength">0.0dip</item>
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionModeOverlay">true</item>
+    <!--<item name="searchViewStyle">@style/MySearchViewStyle</item>-->
+    <item name="colorPrimary">@color/theme_color_Primary</item>
+    <item name="colorPrimaryDark">@color/theme_color_PrimaryDark</item>
+    <item name="colorAccent">@color/theme_color_PrimaryAccent</item>
+
+  </style>
+  <style name="SwipeBackLayout">
+    <item name="edge_size">50dip</item>
+    <item name="shadow_left">@drawable/shadow_left</item>
+    <item name="shadow_right">@drawable/shadow_right</item>
+    <item name="shadow_bottom">@drawable/shadow_bottom</item>
+  </style>
+
+
+  <style name="lockScreenActivityTheme" parent="@style/AppTheme">
+    <item name="android:windowIsTranslucent">true</item>
+  </style>
+
+  <style name="AppTheme" parent="@style/Base.AppTheme" />
+</resources>

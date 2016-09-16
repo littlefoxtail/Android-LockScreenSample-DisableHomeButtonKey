@@ -18,19 +18,18 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import android.widget.TextView;
 import com.github.dubu.lockscreenusingservice.Lockscreen;
 import com.github.dubu.lockscreenusingservice.LockscreenUtil;
 import com.github.dubu.lockscreenusingservice.R;
 import com.github.dubu.lockscreenusingservice.SharedPreferencesUtil;
-import com.romainpiel.shimmer.Shimmer;
-import com.romainpiel.shimmer.ShimmerTextView;
 
 
 /**
  * Created by mugku on 15. 5. 20..
  */
-public class LockscreenViewService extends Service {
-    private final int LOCK_OPEN_OFFSET_VALUE = 50;
+public class LockScreenViewService extends Service {
+    private final int LOCK_OPEN_OFFSET_VALUE = 500;
     private Context mContext = null;
     private LayoutInflater mInflater = null;
     private View mLockscreenView = null;
@@ -42,7 +41,7 @@ public class LockscreenViewService extends Service {
     private RelativeLayout mForgroundLayout = null;
     private RelativeLayout mStatusBackgruondDummyView = null;
     private RelativeLayout mStatusForgruondDummyView = null;
-    private ShimmerTextView mShimmerTextView = null;
+    private TextView mShimmerTextView = null;
     private boolean mIsLockEnable = false;
     private boolean mIsSoftkeyEnable = false;
     private int mDeviceWidth = 0;
@@ -91,7 +90,7 @@ public class LockscreenViewService extends Service {
             initView();
             attachLockScreenView();
         }
-        return LockscreenViewService.START_NOT_STICKY;
+        return LockScreenViewService.START_NOT_STICKY;
     }
 
     @Override
@@ -114,7 +113,7 @@ public class LockscreenViewService extends Service {
             mParams = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.TYPE_PHONE,
+                    WindowManager.LayoutParams.TYPE_TOAST,
                     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                             | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                             | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD,
@@ -191,8 +190,8 @@ public class LockscreenViewService extends Service {
         mBackgroundInLayout = (RelativeLayout) mLockscreenView.findViewById(R.id.lockscreen_background_in_layout);
         mBackgroundLockImageView = (ImageView) mLockscreenView.findViewById(R.id.lockscreen_background_image);
         mForgroundLayout = (RelativeLayout) mLockscreenView.findViewById(R.id.lockscreen_forground_layout);
-        mShimmerTextView = (ShimmerTextView) mLockscreenView.findViewById(R.id.shimmer_tv);
-        (new Shimmer()).start(mShimmerTextView);
+        mShimmerTextView = (TextView) mLockscreenView.findViewById(R.id.shimmer_tv);
+        //(new Shimmer()).start(mShimmerTextView);
         mForgroundLayout.setOnTouchListener(mViewTouchListener);
 
         mStatusBackgruondDummyView = (RelativeLayout) mLockscreenView.findViewById(R.id.lockscreen_background_status_dummy);
@@ -254,7 +253,7 @@ public class LockscreenViewService extends Service {
         private float layoutPrevX = 0;
         private float lastLayoutX = 0;
         private float layoutInPrevX = 0;
-        private boolean isLockOpen = false;
+        private boolean isLockOpen = true;
         private int touchMoveX = 0;
         private int touchInMoveX = 0;
 
@@ -266,9 +265,9 @@ public class LockscreenViewService extends Service {
                     firstTouchX = event.getX();
                     layoutPrevX = mForgroundLayout.getX();
                     layoutInPrevX = mBackgroundLockImageView.getX();
-                    if (firstTouchX <= LOCK_OPEN_OFFSET_VALUE) {
+                    //if (firstTouchX <= LOCK_OPEN_OFFSET_VALUE) {
                         isLockOpen = true;
-                    }
+                    //}
                 }
                 break;
                 case MotionEvent.ACTION_MOVE: { // 2
