@@ -10,7 +10,7 @@
       android:id="@+id/bigAlbumCover"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
-      android:background="@drawable/playpage_background"
+      android:background="@drawable/dva"
       />
   <View
       android:layout_width="fill_parent"
