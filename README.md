@@ -25,9 +25,7 @@ fork from [Android-LockScreenSample-DisableHomeButtonKey](https://github.com/mug
 
 ，使得不局限于边缘。增加了时间显示。
 
-**i am lazy **
-
-**Passing lazy**
+**i am lazy  Passing lazy**
 
 
 License
