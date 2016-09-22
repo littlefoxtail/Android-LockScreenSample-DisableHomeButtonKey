@@ -41,8 +41,8 @@ public class LockScreenService extends Service {
         }
     };
 
-    private void stateRecever(boolean isStartRecever) {
-        if (isStartRecever) {
+    private void stateReceiver(boolean isStartReceiver) {
+        if (isStartReceiver) {
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_SCREEN_OFF);
             registerReceiver(mLockscreenReceiver, filter);
@@ -64,13 +64,13 @@ public class LockScreenService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         mServiceStartId = startId;
-        stateRecever(true);
-        Intent bundleIntet = intent;
-        if (null != bundleIntet) {
-            startLockscreenActivity();
-        } else {
-            Log.d(TAG, TAG + " onStartCommand intent NOT existed");
-        }
+        stateReceiver(true);
+        //Intent bundleIntet = intent;
+        //if (null != bundleIntet) {
+        //    startLockscreenActivity();
+        //} else {
+        //    Log.d(TAG, TAG + " onStartCommand intent NOT existed");
+        //}
         //setLockGuard();
         return LockScreenService.START_STICKY;
     }
@@ -124,7 +124,7 @@ public class LockScreenService extends Service {
 
     @Override
     public void onDestroy() {
-        stateRecever(false);
+        stateReceiver(false);
         //setStandardKeyguardState(true);
     }
 

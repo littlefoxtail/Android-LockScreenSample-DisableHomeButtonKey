@@ -145,7 +145,7 @@
         android:layout_centerVertical="true"
         android:layout_weight="1.0"
         android:src="@drawable/lock_btn_pause"
-        android:visibility="gone"
+        android:visibility="visible"
         />
     <ImageView
         android:id="@+id/lockScreenNext"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
@@ -18,7 +19,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
+import com.github.dubu.lockscreenusingservice.lockscreen.LockScreenHelper;
 import com.github.dubu.lockscreenusingservice.service.LockScreenViewService;
 import com.swipebacklayout.SwipeBackLayout;
 import com.swipebacklayout.Utils;
@@ -31,6 +34,8 @@ public class LockScreenActivity extends Activity {
 
     private SwipeBackActivityHelper swipeBackActivityHelper;
     private ImageSwitcher bigAlbumCover;
+    private ImageView lockScreenPlay;
+    private LockScreenHelper helper;
 
     public static void startLockScreenActivity(Context context) {
         Intent intent = new Intent(context, LockScreenActivity.class);
@@ -223,6 +228,25 @@ public class LockScreenActivity extends Activity {
         });
         bigAlbumCover.setInAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_in_right));
         bigAlbumCover.setOutAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out_left));
+
+        lockScreenPlay = (ImageView) findViewById(R.id.lockScreenPlay);
+
+        //lockScreenTime = (TextView) findViewById(R.id.lockScreenCurrentTime);
+        helper = new LockScreenHelper(getApplicationContext(), this);
+        helper.initTimeReceiver();
+        initListener();
+
+    }
+
+    private void initListener() {
+        lockScreenPlay.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                //new Intent(LockScreenActivity.this)
+                Intent intent = new Intent();
+                intent.setData(Uri.parse("sinaweibo://userinfo?uid=1900887504"));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override protected void onPostCreate(Bundle savedInstanceState) {
@@ -292,6 +316,9 @@ public class LockScreenActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (helper != null) {
+            helper.release();
+        }
     }
 
 
